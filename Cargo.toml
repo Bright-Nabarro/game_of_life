@@ -1,0 +1,9 @@
+[package]
+name = "game_of_life"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+[dependencies.sdl2]
+version = "0.37"
+features = ["ttf", "unsafe_textures"]
