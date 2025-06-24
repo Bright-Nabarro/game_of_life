@@ -75,11 +75,6 @@ impl From<Layout> for LayoutContent {
     }
 }
 
-impl LayoutContent {
-    pub fn rendering(&self) {
-    }
-}
-
 impl Layout {
     pub fn new(direction: Direction) -> Self {
         Layout {
@@ -193,6 +188,7 @@ impl Layout {
 
 
 pub struct LayoutManager {
+    theme_manager: theme::RcThemeManager,
     widget_base_builder: widget_base::WidgetBaseBuilder,
 }
 
@@ -201,8 +197,8 @@ impl LayoutManager {
         canvas: Rc<RefCell<render::WindowCanvas>>) 
         -> Self
     {
-        let widget_base_builder = widget_base::WidgetBaseBuilder::new(theme_manager, canvas);
-        LayoutManager { widget_base_builder }
+        let widget_base_builder = widget_base::WidgetBaseBuilder::new(theme_manager.clone(), canvas);
+        LayoutManager { theme_manager: theme_manager, widget_base_builder }
     }
 
     fn get_blank(&self) -> widget_base::BlankWidget {
@@ -210,7 +206,7 @@ impl LayoutManager {
     }
 
     fn get_camera(&self) -> error::Result<camera::Camera> {
-        camera::Camera::new(self.widget_base_builder.build(), 0.5)
+        camera::Camera::new(self.widget_base_builder.build(), self.theme_manager.clone())
     }
 
     pub fn get_default_layout(&self) -> error::Result<Layout> {

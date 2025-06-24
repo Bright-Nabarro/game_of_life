@@ -12,6 +12,7 @@ static WINDOW_WIDTH: u32 = 1280;
 static WINDOW_HEIGHT: u32 = 720;
 static WINDOW_BG_COLOR: Color = Color::WHITE;
 static CAMERA_BG_COLOR: Color = Color::GRAY;
+static GRID_LINE_COLOR: Color = Color::BLACK;
 
 #[derive(Debug)]
 pub struct ThemeManager {
@@ -21,6 +22,7 @@ pub struct ThemeManager {
     window_bg_color: Color,
     camera_bg_color: Color,
     default_widget_color: Color,
+    grid_line_color: Color,
 }
 
 impl ThemeManager {
@@ -33,6 +35,7 @@ impl ThemeManager {
             window_bg_color: WINDOW_BG_COLOR,
             camera_bg_color: CAMERA_BG_COLOR,
             default_widget_color: WINDOW_BG_COLOR,
+            grid_line_color: GRID_LINE_COLOR,
         };
         Ok(theme_manager)
     }
@@ -59,5 +62,9 @@ impl ThemeManager {
 
     pub fn default_widget_color(&self) -> Color {
         self.default_widget_color.clone()
+    }
+
+    pub fn grid_line_color(&self) -> Color {
+        self.grid_line_color.clone()
     }
 }

@@ -1,6 +1,7 @@
-mod controller;
 mod utils;
+mod model;
 mod view;
+mod controller;
 
 use controller::game_controller;
 use utils::error;
